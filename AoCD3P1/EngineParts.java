@@ -140,11 +140,71 @@ public class EngineParts {
                 this.sum += number;
             }
 
-            //TODO: Number is directly above symbol
+            //Number is directly above symbol
+            if(i < 139 && Character.isDigit((input[lineNumber - 1][i]))){
+                tens = 10 * Character.getNumericValue(input[lineNumber - 1][i]);
 
-            //TODO: Number is directly below symbol
+                if(i-1 > 0 && Character.isDigit(input[lineNumber - 1][i-1])){
+                    ones = tens / 10;
+                    tens = 10 * Character.getNumericValue(input[lineNumber-1][i-1]);
+                    if(Character.isDigit(input[lineNumber - 1][i-2])) hundreds = 100 * Character.getNumericValue(input[lineNumber-1][i-2]);
+                    else if(i+1 < 139 && Character.isDigit(input[lineNumber - 1][i+1])){
+                        hundreds = 10 * tens;
+                        tens = 10 * ones;
+                        ones = Character.getNumericValue(input[lineNumber - 1][i+1]);
+                    }
+                }
+                 
+                /*else if(i+1 < 139 && Character.isDigit(input[lineNumber-1][i+1])){
+                    hundreds = 10 * tens;
+                    tens = Character.getNumericValue(input[lineNumber - 1][i+1]);
+
+                    if(i+2 < 139 && Character.isDigit(input[lineNumber - 1][i+2])) ones = Character.getNumericValue(input[lineNumber - 1][i+2]);
+                }*/
+
+                int number = hundreds + tens + ones;
+
+                if(tens == 0 && ones == 0) number = number/100;
+                if(ones == 0) number = number/10;
+
+
+                this.sum += number;
+
+            }
+             
+            //Number is directly below symbol
+            if(i < 139 && Character.isDigit((input[lineNumber + 1][i]))){
+                tens = 10 * Character.getNumericValue(input[lineNumber + 1][i]);
+
+                if(i-1 > 0 && Character.isDigit(input[lineNumber + 1][i-1])){
+                    ones = tens / 10;
+                    tens = 10 * Character.getNumericValue(input[lineNumber+1][i-1]);
+                    if(Character.isDigit(input[lineNumber + 1][i-2])) hundreds = 100 * Character.getNumericValue(input[lineNumber+1][i-2]);
+                    else if(i+1 < 139 && Character.isDigit(input[lineNumber + 1][i+1])){
+                        hundreds = 10 * tens;
+                        tens = 10 * ones;
+                        ones = Character.getNumericValue(input[lineNumber + 1][i+1]);
+                    }
+                }
+
+                /*else if(i+1 < 139 && Character.isDigit(input[lineNumber+1][i+1])){
+                    hundreds = 10 * tens;
+                    tens = Character.getNumericValue(input[lineNumber + 1][i+1]);
+
+                    if(i+2 < 139 && Character.isDigit(input[lineNumber + 1][i+2])) ones = Character.getNumericValue(input[lineNumber + 1][i+2]);
+                }*/
+
+                int number = hundreds + tens + ones;
+
+                if(tens == 0 && ones == 0) number = number/100;
+                if(ones == 0) number = number/10;
+
+
+                this.sum += number;
+            }
 
         }
+        
     }
 
     public void mainHelper(){
